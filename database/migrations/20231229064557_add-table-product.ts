@@ -1,8 +1,7 @@
-/**
- * @param { import("knex").Knex } knex
- * @returns { Promise<void> }
- */
-exports.up = function (knex) {
+import type { Knex } from "knex";
+
+
+export async function up(knex: Knex): Promise<void> {
 	return knex.raw(`CREATE TABLE products (uuid char(36) NOT NULL,
 	kode varchar(100) NOT NULL,
 	nama varchar(100) NOT NULL,
@@ -12,12 +11,10 @@ exports.up = function (knex) {
 	updatedAt timestamp NULL,
 	UNIQUE INDEX UQ_fe0bb3f6520ee1234504521e710 (kode),
 	PRIMARY KEY (uuid)) ENGINE = InnoDB`)
-};
+}
 
-/**
- * @param { import("knex").Knex } knex
- * @returns { Promise<void> }
- */
-exports.down = function (knex) {
+
+export async function down(knex: Knex): Promise<void> {
 	return knex.raw('DROP TABLE products')
-};
+}
+
