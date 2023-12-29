@@ -1,7 +1,7 @@
 import { Channel } from 'amqplib';
 import configuration from '../../../config';
 import { EventMessageData } from '../../../types/listenerQueue';
-import CreateLogs from '../../../services/CreateLogs';
+import { logger } from '@knittotextile/knitto-core-backend';
 const queueName = 'backendLogs';
 
 async function listenLogs(channel: Channel) {
@@ -9,20 +9,21 @@ async function listenLogs(channel: Channel) {
 
 	channel.bindQueue(queue, configuration.RABBITMQ_EXCHANGE, '#');
 	channel.prefetch(1);
-	console.info('RabbitMQ can receive message');
+	logger.info('RabbitMQ can receive message');
 
 	channel.consume(queue, (message) => {
 		if (message?.content) {
-			console.info(`Receive on Consumer 1: ${message.content.toString()}`);
+			logger.info(`Receive on ${queueName}: ${message.content.toString()}`);
 			const contentString = message.content.toString();
 			const messageJson = JSON.parse(contentString) as EventMessageData;
-			new CreateLogs(messageJson).create()
-				.then(() => {
-					channel.ack(message);
-				})
-				.catch(() => {
-					//
-				});
+			logger.info(messageJson);
+			// ?: do somthing
+			// new CreateLogs(messageJson).create()
+			// 	.then(() => {
+			// 		channel.ack(message);
+			// 	})
+			// 	.catch(() => {
+			// 	});
 		}
 	});
 };
