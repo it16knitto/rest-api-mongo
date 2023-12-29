@@ -9,7 +9,7 @@ exports.up = function (knex) {
 	deskripsi text NOT NULL,
 	harga float(2) NOT NULL,
 	createdAt timestamp NULL,
-	deletedAt timestamp NULL,
+	updatedAt timestamp NULL,
 	UNIQUE INDEX UQ_fe0bb3f6520ee1234504521e710 (kode),
 	PRIMARY KEY (uuid)) ENGINE = InnoDB`)
 };

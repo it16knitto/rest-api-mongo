@@ -3,14 +3,14 @@ import configuration from '../../../config';
 import { EventMessageData } from '../../../types/listenerQueue';
 import configRabbitMq from '../../../config/configRabbitMq';
 
-function sendLogs(message: EventMessageData, topic: string) {
+function sendLogs(message: EventMessageData) {
 	configRabbitMq()
 		.then(async result => {
 			const channel = result.channel as Channel;
 			const connection = result.connection as Connection;
 
 			try {
-				channel.publish(configuration.RABBITMQ_EXCHANGE, topic, Buffer.from(JSON.stringify(message)), { persistent: true });
+				channel.publish(configuration.RABBITMQ_EXCHANGE, message.eventName, Buffer.from(JSON.stringify(message)), { persistent: true });
 			} catch (error) {
 
 			} finally {

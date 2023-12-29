@@ -5,5 +5,5 @@ export interface ProductEntity {
 	deskripsi: string
 	harga: number
 	createdAt?: Date
-	deletedAt?: Date
+	updatedAt?: Date
 }

@@ -9,20 +9,20 @@ exports.up = function (knex) {
 			table.string('no_order', 50);
 			table.timestamp('tanggal').notNullable();
 			table.uuid('user_uuid').notNullable();
-			table.float('total', 2).notNullable();
+			table.double('total').notNullable();
 			table.timestamp('createdAt');
-			table.timestamp('deletedAt');
+			table.timestamp('updatedAt');
 		})
 		.createTable('order_details', function (table) {
 			table.uuid('uuid').notNullable().primary();
 			table.uuid('order_uuid').notNullable();
 			table.uuid('product_uuid').notNullable();
 			table.uuid('user_uuid').notNullable();
-			table.float('qty', 2).notNullable();
-			table.float('harga', 2).notNullable();
-			table.float('nilai', 2).notNullable();
+			table.double('qty').notNullable();
+			table.double('harga').notNullable();
+			table.double('nilai').notNullable();
 			table.timestamp('createdAt');
-			table.timestamp('deletedAt');
+			table.timestamp('updatedAt');
 		});
 };
 

@@ -36,7 +36,7 @@ const authLogin: TRequestFunction = async (req: ExpressType.Request) => {
 				id: Date.now(),
 				eventName: 'login',
 				data: []
-			}, 'auth');
+			});
 
 			return {
 				result: {

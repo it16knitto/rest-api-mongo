@@ -8,7 +8,7 @@ exports.up = function (knex) {
 			table.uuid('uuid').notNullable().primary();
 			table.text('keterangan').notNullable();
 			table.timestamp('createdAt');
-			table.timestamp('deletedAt');
+			table.timestamp('updatedAt');
 		})
 };
 

@@ -5,5 +5,5 @@ export interface UserEntity {
 	username: string
 	password: string
 	createdAt?: Date
-	deletedAt?: Date
+	updatedAt?: Date
 }

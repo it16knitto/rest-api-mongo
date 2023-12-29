@@ -1,7 +1,6 @@
 {
-	"name": "backend-knitto-ts",
-	"version": "1.0.0",
-	"description": "",
+	"name": "rest-boilerplate-ts",
+	"version": "0.0.1",
 	"main": "index.ts",
 	"scripts": {
 		"build": "rm -fr dist/* && npx tsc",

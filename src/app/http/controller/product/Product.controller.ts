@@ -17,6 +17,9 @@ const getOneProduct: TRequestFunction = async (req: ExpressType.Request) => {
 	const uuid = req.params.uuid;
 	const product = await connectionMysql.raw<ProductEntity[]>('SELECT * FROM products where uuid = ?', [uuid])
 		.then(result => result[0]);
+
+	if (!product) throw new Exception.NotFoundException('Product not found');
+
 	return { result: product };
 };
 
@@ -24,9 +27,9 @@ const createProduct: TRequestFunction = async (req: ExpressType.Request) => {
 	const productDto = req.body as ProductDto;
 	const productRepo = new ProductRepository(connectionMysql);
 
-	const createProduct = await productRepo.insert(productDto);
+	const insertProduct = await productRepo.insert(productDto);
 
-	return { result: createProduct };
+	return { result: insertProduct };
 };
 
 const updateProduct: TRequestFunction = async (req: ExpressType.Request) => {
@@ -40,7 +43,7 @@ const updateProduct: TRequestFunction = async (req: ExpressType.Request) => {
 	const productDto = req.body as ProductDto;
 	const productRepo = new ProductRepository(connectionMysql);
 
-	const updateProduct = await productRepo.update({
+	const changeProduct = await productRepo.update({
 		nama: productDto.nama,
 		deskripsi: productDto.deskripsi,
 		harga: productDto.harga,
@@ -51,7 +54,7 @@ const updateProduct: TRequestFunction = async (req: ExpressType.Request) => {
 		throw new Exception.InvalidParameterException(String(err));
 	});
 
-	return { result: updateProduct };
+	return { result: changeProduct };
 };
 
 const deleteProduct: TRequestFunction = async (req: ExpressType.Request) => {
@@ -64,9 +67,9 @@ const deleteProduct: TRequestFunction = async (req: ExpressType.Request) => {
 
 	const productRepo = new ProductRepository(connectionMysql);
 
-	const deleteProduct = await productRepo.remove({ uuid: paramUuid });
+	const removeProduct = await productRepo.remove({ uuid: paramUuid });
 
-	return { result: deleteProduct };
+	return { result: removeProduct };
 };
 
 export { getProduct, getOneProduct, createProduct, updateProduct, deleteProduct };

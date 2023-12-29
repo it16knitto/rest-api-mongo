@@ -11,7 +11,7 @@ exports.up = function (knex) {
 			table.string('username', 30).unique();
 			table.string('password', 255).notNullable();
 			table.dateTime('createdAt').nullable();
-			table.dateTime('deletedAt').nullable();
+			table.dateTime('updatedAt').nullable();
 		})
 };
 

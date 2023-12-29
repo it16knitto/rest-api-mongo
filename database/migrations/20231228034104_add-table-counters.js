@@ -8,7 +8,7 @@ exports.up = function(knex) {
     table.string('no_generate', 50).notNullable();
     table.integer('count').notNullable();
     table.timestamp('createdAt');
-    table.timestamp('deletedAt');
+    table.timestamp('updatedAt');
   });
 };
 
