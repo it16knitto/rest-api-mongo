@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const configuration = {
-	APP_NAME: 'Knitto Backend',
+	APP_NAME: process.env.APP_NAME,
 	NODE_ENV: process.env.NODE_ENV ?? 'development',
 	APP_PORT_HTTP: process.env.APP_PORT_HTTP,
 	DB_HOST_MYSQL: process.env.DB_HOST_MYSQL,

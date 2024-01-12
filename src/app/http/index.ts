@@ -1,5 +1,4 @@
 import { ExpressServer } from '@knittotextile/knitto-core-backend';
-
 import path from 'path';
 import configuration from '../../config';
 

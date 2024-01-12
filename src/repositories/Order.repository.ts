@@ -1,10 +1,10 @@
 import { EntityRepo } from '@knittotextile/knitto-core-backend';
 import { v4 as uuidv4 } from 'uuid';
-import { ProductEntity } from '../entity/Product.entity';
+import { OrderEntity } from '../entity/Order.entity';
 
-export default class ProductRepository extends EntityRepo<ProductEntity | { uuid: string }> {
-	tableName = 'products';
-	async insert(data: ProductEntity): Promise<unknown> {
+export default class OrderRepository extends EntityRepo<OrderEntity> {
+	tableName = 'orders';
+	async insert(data: OrderEntity): Promise<unknown> {
 		data.uuid = uuidv4();
 		data.createdAt = new Date();
 		return await super.insert(data);
@@ -14,7 +14,7 @@ export default class ProductRepository extends EntityRepo<ProductEntity | { uuid
 		const { perPage, page } = param;
 
 		const data = await this.dbConnector.basicPaginate({
-			query: 'SELECT * FROM products',
+			query: 'SELECT * FROM orders',
 			perPage,
 			page
 		});

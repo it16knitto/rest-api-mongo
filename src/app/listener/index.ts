@@ -1,6 +1,7 @@
 import { Channel } from 'amqplib';
 import listenLogs from './listen/listenLogs';
 import configRabbitMq from '../../config/configRabbitMq';
+import { logger } from '@knittotextile/knitto-core-backend';
 
 async function listener() {
 	try {
@@ -13,7 +14,7 @@ async function listener() {
 				throw error;
 			});
 	} catch (error) {
-		console.error(error);
+		logger.error(error);
 	}
 }
 

@@ -32,7 +32,10 @@
 	],
 	"exclude": [
 		"node_modules",
-		"dist"
+		"dist",
+		"database",
+		"tests",
+		"jest.config.ts"
 	]
 }
 
