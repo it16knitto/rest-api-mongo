@@ -1,20 +1,13 @@
-import { Channel } from 'amqplib';
-import listenLogs from './listen/listenLogs';
-import configRabbitMq from '../../config/configRabbitMq';
 import { logger } from '@knittotextile/knitto-core-backend';
+import { rabbitConnection } from '../../config/rabbitConnection';
+import path from 'path';
 
 async function listener() {
 	try {
-		configRabbitMq()
-			.then(async result => {
-				const channel = result.channel as Channel;
-
-				await listenLogs(channel);
-			}).catch(error => {
-				throw error;
-			});
-	} catch (error) {
-		logger.error(error);
+		await rabbitConnection.subscribe(path.join(__dirname, './listen'));
+	} catch (err) {
+		logger.error({ err });
+		throw err;
 	}
 }
 
