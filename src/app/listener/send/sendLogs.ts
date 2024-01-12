@@ -1,27 +1,15 @@
-import { Channel, Connection } from 'amqplib';
 import configuration from '../../../config';
 import { EventMessageData } from '../../../types/listenerQueue';
-import configRabbitMq from '../../../config/configRabbitMq';
+import { rabbitConnection } from '../../../config/rabbitConnection';
+import { logger } from '@knittotextile/knitto-core-backend';
 
-function sendLogs(message: EventMessageData) {
-	configRabbitMq()
-		.then(async result => {
-			const channel = result.channel as Channel;
-			const connection = result.connection as Connection;
-
-			try {
-				channel.publish(configuration.RABBITMQ_EXCHANGE, message.eventName, Buffer.from(JSON.stringify(message)), { persistent: true });
-			} catch (error) {
-
-			} finally {
-				setTimeout(() => {
-					channel.close();
-					connection.close();
-				}, 3000);
-			}
-		}).catch(error => {
-			throw error;
-		});
+async function sendLogs(message: EventMessageData) {
+	try {
+		await rabbitConnection.publishMessage(message, { exchangeName: configuration.RABBITMQ_EXCHANGE, routingKey: message.eventName });
+	} catch (err) {
+		logger.error(err);
+		throw err;
+	}
 }
 
 export default sendLogs;
