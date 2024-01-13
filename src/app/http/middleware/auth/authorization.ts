@@ -1,4 +1,4 @@
-import { ExpressType, Helpers } from '@knittotextile/knitto-core-backend';
+import { ExpressType, Helpers, logger } from '@knittotextile/knitto-core-backend';
 import jwt from 'jsonwebtoken';
 import configuration from '../../../../config';
 
@@ -25,12 +25,14 @@ function authorizeMiddlware(req: ExpressType.Request, res: ExpressType.Response,
 				if (err) Helpers.sendResponse({ status: 401, result: 'Token Expired' }, res);
 				req.params.userUuid = decode.uuid;
 
-				console.info({
-					name: decode.nama,
-					path: req.path,
-					query: req.query,
-					data: req.body
-				});
+				if (configuration.NODE_ENV === 'development') {
+					logger.info({
+						name: decode.nama,
+						path: req.path,
+						query: req.query,
+						data: req.body
+					});
+				}
 				next();
 			});
 			break;
