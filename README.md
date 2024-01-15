@@ -13,13 +13,13 @@ kunjungi branch **[example/simple-case](https://github.com/knittotextile/rest-bo
 
 ```bash
 / root directory
-├── database 				# digunakan untuk migration database
-│   ├── knexfile.ts 		# Koneksi database untuk melakukan migration
-│   └── migrations 			# berisi kumpulan migration data
-├── src 					# source prorgam
-│   ├── app					# folder jenis aplikasi yang dibuat
+├── database                    # digunakan untuk migration database
+│   ├── knexfile.ts             # Koneksi database untuk melakukan migration
+│   └── migrations              # berisi kumpulan migration data
+├── src                         # source prorgam
+│   ├── app                     # folder jenis aplikasi yang dibuat
 │   │   │
-│   │   ├── http 			# aplikasi http / rest / api
+│   │   ├── http                # aplikasi http / rest / api
 │   │   │   ├── controller
 │   │   │   │   ├── nama.controller
 │   │   │   │   │   ├── [nama-controller].dto.ts
@@ -33,24 +33,24 @@ kunjungi branch **[example/simple-case](https://github.com/knittotextile/rest-bo
 │   │   │   ├── routes
 │   │   │   │    ├── [nama-router].routes.ts
 │   │   │   │    └── [...n-router].routes.ts
-│   │   │   └── index.ts 	# konfigurasi awal http / rest / api
+│   │   │   └── index.ts        # konfigurasi awal http / rest / api
 │   │   ├── listener
-│   │   │   ├── listen		# kumpulan sucbscriber
-│   │   │   ├── send		# kumpulan send event yang di kirim
-│   │   │   └── index.ts 	# konfigurasi awal listener / queue
+│   │   │   ├── listen          # kumpulan sucbscriber
+│   │   │   ├── send            # kumpulan send event yang di kirim
+│   │   │   └── index.ts        # konfigurasi awal listener / queue
 │   │   ├── timer
-│   │   │   └── index.ts 	# konfigurasi awal timer / task scheduler
+│   │   │   └── index.ts        # konfigurasi awal timer / task scheduler
 │   │   └── ws
-│   │       └── index.ts 	# konfigurasi websocket
-│   ├── config				# konfigurasi koneksi / environment aplikasi
-│   ├── entity				# kumpulan entity
-│   ├── libs				# berisikan aplikasi atau interaksi pihak ke 3
-│   ├── repositories		# kumpulan repositori
-│   ├── services			# kumpulan share kode aplikasi yang reusable
-│   ├── types				# kumpulan file types d.ts
-│   └── index.ts			# pemanggilan awal aplikasi
-├── storage 				# penyimpanan logs dan files
-└── tests					# folder untuk testing global
+│   │       └── index.ts        # konfigurasi websocket
+│   ├── config                  # konfigurasi koneksi / environment aplikasi
+│   ├── entity                  # kumpulan entity
+│   ├── libs                    # berisikan aplikasi atau interaksi pihak ke 3
+│   ├── repositories            # kumpulan repositori
+│   ├── services                # kumpulan share kode aplikasi yang reusable
+│   ├── types                   # kumpulan file types d.ts
+│   └── index.ts                # pemanggilan awal aplikasi
+├── storage                     # penyimpanan logs dan files
+└── tests                       # folder untuk testing global
 ```
 
 ## Core Knitto Package
