@@ -2,8 +2,7 @@
 import { validate, ValidationError, ValidatorOptions } from 'class-validator';
 import { plainToInstance } from 'class-transformer';
 import { sanitize } from 'class-sanitizer';
-import sendResponse from '@knittotextile/knitto-core-backend/dist/Helpers/send-response';
-import { ExpressType } from '@knittotextile/knitto-core-backend';
+import { sendResponse, ExpressType } from '@knittotextile/knitto-http';
 
 interface ValidateRequestParam {
 	type: any

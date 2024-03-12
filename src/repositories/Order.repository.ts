@@ -1,4 +1,4 @@
-import { EntityRepo } from '@knittotextile/knitto-core-backend';
+import { EntityRepo } from '@knittotextile/knitto-mysql';
 import { v4 as uuidv4 } from 'uuid';
 import { OrderEntity } from '../entity/Order.entity';
 

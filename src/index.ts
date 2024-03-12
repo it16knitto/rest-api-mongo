@@ -1,15 +1,15 @@
 import { logger } from '@knittotextile/knitto-core-backend';
 import httpServer from './app/http';
-import listener from './app/listener';
-import { connectionMysql } from './config/dbConnection';
-import { rabbitConnection } from './config/rabbitConnection';
+import messageBroker from './app/messageBroker';
+import { connectionMysql } from './libs/config/dbConnection';
+import { rabbitConnection } from './libs/config/rabbitConnection';
 
 async function startApp() {
 	try {
 		await httpServer();
 		await connectionMysql.init();
 		await rabbitConnection.init();
-		await listener();
+		await messageBroker();
 	} catch (error) {
 		logger.error(error);
 		throw error;

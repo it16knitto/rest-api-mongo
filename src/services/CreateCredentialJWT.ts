@@ -1,6 +1,6 @@
-import configuration from '../config';
+import configuration from '../libs/config';
 import jwt from 'jsonwebtoken';
-import { connectionMysql } from '../config/dbConnection';
+import { connectionMysql } from '../libs/config/dbConnection';
 import { UserEntity } from '../entity/User.entity';
 class CreateCredentialJWT {
 	constructor(private readonly uuid: string) {}
