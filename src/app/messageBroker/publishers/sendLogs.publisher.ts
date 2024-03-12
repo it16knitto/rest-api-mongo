@@ -1,6 +1,6 @@
-import configuration from '../../../config';
-import { EventMessageData } from '../../../types/listenerQueue';
-import { rabbitConnection } from '../../../config/rabbitConnection';
+import configuration from '../../../libs/config';
+import { EventMessageData } from '../../../libs/types/listenerQueue';
+import { rabbitConnection } from '../../../libs/config/rabbitConnection';
 import { logger } from '@knittotextile/knitto-core-backend';
 
 async function sendLogs(message: EventMessageData) {

@@ -1,4 +1,4 @@
-import { MySqlConnector } from '@knittotextile/knitto-core-backend';
+import { MySqlConnector } from '@knittotextile/knitto-mysql';
 import configuration from '.';
 
 export const connectionMysql = new MySqlConnector({

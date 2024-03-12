@@ -1,6 +1,6 @@
-import { ExpressServer } from '@knittotextile/knitto-core-backend';
+import { ExpressServer } from '@knittotextile/knitto-http';
 import path from 'path';
-import configuration from '../../config';
+import configuration from '../../libs/config';
 
 async function httpServer() {
 	try {
