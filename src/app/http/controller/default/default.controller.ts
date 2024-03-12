@@ -1,7 +1,7 @@
-import { ExpressType, TRequestFunction } from '@knittotextile/knitto-core-backend';
-import configuration from '../../../../config';
+import { TRequestFunction } from '@knittotextile/knitto-http';
+import configuration from '../../../../libs/config';
 
-const defaultController: TRequestFunction = async (req: ExpressType.Request) => {
+const defaultController: TRequestFunction = async (req) => {
 	const query = req.query;
 	const result = {
 		nama_aplikasi: configuration.APP_NAME,
