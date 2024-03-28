@@ -1,6 +1,6 @@
 {
 	"name": "rest-boilerplate-ts",
-	"version": "0.3.2",
+	"version": "0.4.0",
 	"main": "index.ts",
 	"scripts": {
 		"build": "rm -fr dist/* && npx tsc",
