@@ -1,11 +1,10 @@
-import { logger } from '@knittotextile/knitto-core-backend';
 import jwt from 'jsonwebtoken';
-import configuration from '../../../../libs/config';
+import configuration from '@libs/config';
 import { ExpressType, sendResponse } from '@knittotextile/knitto-http';
 
 function authorizeMiddlware(req: ExpressType.Request, res: ExpressType.Response, next: ExpressType.NextFunction) {
 	const tokenHeader = req.headers.authorization;
-	if (!tokenHeader) sendResponse({ status: 400 }, res);
+	if (!tokenHeader) { sendResponse({ status: 403, message: 'Authentication required.' }, res); return; }
 
 	const token: string[] = tokenHeader.split(' ');
 	switch (true) {
@@ -24,16 +23,7 @@ function authorizeMiddlware(req: ExpressType.Request, res: ExpressType.Response,
 		default:
 			jwt.verify(token[1], configuration.APP_SECRET_KEY, (err: any, decode: any) => {
 				if (err) sendResponse({ status: 401, result: 'Token Expired' }, res);
-				req.params.userUuid = decode.uuid;
-
-				if (configuration.NODE_ENV === 'development') {
-					logger.info({
-						name: decode.nama,
-						path: req.path,
-						query: req.query,
-						data: req.body
-					});
-				}
+				(req as any).userId = decode.id;
 				next();
 			});
 			break;
