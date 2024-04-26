@@ -1,5 +1,5 @@
 import rabbitSubscribers from '@knittotextile/knitto-rabbitmq/dist/rabbit-subscriber';
-import configuration from '../../../libs/config';
+import configuration from '@root/libs/config';
 const queueName = 'backendLogs';
 
 const listenLogs = rabbitSubscribers();

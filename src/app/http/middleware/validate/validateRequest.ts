@@ -6,7 +6,7 @@ import { sendResponse, ExpressType } from '@knittotextile/knitto-http';
 
 interface ValidateRequestParam {
 	type: any
-	requestType: 'body' | 'query'
+	requestType: 'body' | 'query' | 'param'
 	opts?: ValidatorOptions
 };
 
@@ -27,6 +27,8 @@ export default function validateRequest(param: ValidateRequestParam): ExpressTyp
 
 		if (param.requestType === 'query') {
 			dtoObj = plainToInstance(param.type, req.query);
+		} else if (param.requestType === 'param') {
+			dtoObj = plainToInstance(param.type, req.params);
 		} else {
 			dtoObj = plainToInstance(param.type, req.body);
 		}
@@ -42,7 +44,13 @@ export default function validateRequest(param: ValidateRequestParam): ExpressTyp
 				} else {
 					sanitize(dtoObj);
 
-					if (param.requestType === 'query') { req.query = dtoObj; } else { req.body = dtoObj; }
+					if (param.requestType === 'query') {
+						req.query = dtoObj;
+					} else if (param.requestType === 'body') {
+						req.body = dtoObj;
+					} else {
+						req.params = { ...req.params, ...dtoObj };
+					}
 
 					next();
 				}

@@ -1,12 +1,12 @@
-import configuration from '../libs/config';
+import configuration from '@root/libs/config';
 import jwt from 'jsonwebtoken';
-import { connectionMysql } from '../libs/config/dbConnection';
-import { UserEntity } from '../entity/User.entity';
+import { connectionMysql } from '@root/libs/config/dbConnection';
 class CreateCredentialJWT {
 	constructor(private readonly uuid: string) {}
 
 	async generateToken(): Promise<string | null> {
-		const checkUser = await connectionMysql.raw<UserEntity[]>('SELECT * FROM users WHERE uuid = ? LIMIT 1', [this.uuid]).then(res => res[0]);
+		const checkUser = await connectionMysql.raw<Entity.User[]>('SELECT * FROM users WHERE uuid = ? LIMIT 1', [this.uuid])
+			.then(res => res[0]);
 
 		if (checkUser) {
 			const token = jwt.sign({

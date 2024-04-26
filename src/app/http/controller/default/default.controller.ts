@@ -1,5 +1,5 @@
 import { TRequestFunction } from '@knittotextile/knitto-http';
-import configuration from '../../../../libs/config';
+import configuration from '@root/libs/config';
 
 const defaultController: TRequestFunction = async (req) => {
 	const query = req.query;

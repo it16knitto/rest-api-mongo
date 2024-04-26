@@ -1,5 +1,5 @@
 import { logger } from '@knittotextile/knitto-core-backend';
-import { rabbitConnection } from '../../libs/config/rabbitConnection';
+import { rabbitConnection } from '@root/libs/config/rabbitConnection';
 import path from 'path';
 
 async function listener() {
