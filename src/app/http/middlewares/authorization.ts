@@ -1,8 +1,8 @@
 import jwt from 'jsonwebtoken';
-import configuration from '@libs/config';
 import { ExpressType, sendResponse } from '@knittotextile/knitto-http';
+import { APP_SECRET_KEY } from '@root/libs/config';
 
-function authorizeMiddlware(req: ExpressType.Request, res: ExpressType.Response, next: ExpressType.NextFunction) {
+const authorizeMiddlware = (req: ExpressType.Request, res: ExpressType.Response, next: ExpressType.NextFunction) => {
 	const tokenHeader = req.headers.authorization;
 	if (!tokenHeader) { sendResponse({ status: 403, message: 'Authentication required.' }, res); return; }
 
@@ -21,13 +21,15 @@ function authorizeMiddlware(req: ExpressType.Request, res: ExpressType.Response,
 			sendResponse({ status: 400, result: 'Error Token Format Body' }, res);
 			break;
 		default:
-			jwt.verify(token[1], configuration.APP_SECRET_KEY, (err: any, decode: any) => {
+			jwt.verify(token[1], APP_SECRET_KEY, (err: any, decode: any) => {
 				if (err) sendResponse({ status: 401, result: 'Token Expired' }, res);
-				(req as any).userId = decode.id;
-				next();
+				else {
+					(req as any).userId = decode.id;
+					next();
+				}
 			});
 			break;
 	}
-}
+};
 
 export default authorizeMiddlware;

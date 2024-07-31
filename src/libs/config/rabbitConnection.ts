@@ -1,7 +1,9 @@
 import KnittoRabbitMQ from '@knittotextile/knitto-rabbitmq';
-import configuration from '.';
+import { rabbitMQConfig } from '.';
 
-export const rabbitConnection = new KnittoRabbitMQ({
+const rabbitConnection = new KnittoRabbitMQ({
 	connectionName: 'rabbit-connection',
-	url: configuration.RABBITMQ_URL
+	url: rabbitMQConfig.EXCHANGE
 });
+
+export default rabbitConnection;

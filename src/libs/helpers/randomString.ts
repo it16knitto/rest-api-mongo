@@ -1,4 +1,4 @@
-function randomString(length: number = 10) {
+const randomString = (length: number = 10) => {
 	const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 	let randomString = '';
 
@@ -8,6 +8,6 @@ function randomString(length: number = 10) {
 	}
 
 	return randomString;
-}
+};
 
 export default randomString;

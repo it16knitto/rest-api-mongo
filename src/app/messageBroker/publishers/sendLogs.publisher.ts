@@ -1,11 +1,13 @@
-import configuration from '@root/libs/config';
-import { EventMessageData } from '@root/libs/types/listenerQueue';
-import { rabbitConnection } from '@root/libs/config/rabbitConnection';
+import{ rabbitMQConfig } from '@root/libs/config';
 import { logger } from '@knittotextile/knitto-core-backend';
+import rabbitConnection from '@root/libs/config/rabbitConnection';
 
-async function sendLogs(message: EventMessageData) {
+async function sendLogs(message: listenerQueue.EventMessageData) {
 	try {
-		await rabbitConnection.publishMessage(message, { exchangeName: configuration.RABBITMQ_EXCHANGE, routingKey: message.eventName });
+		await rabbitConnection.publishMessage(message, {
+			exchangeName: rabbitMQConfig.EXCHANGE,
+			routingKey: message.eventName
+		});
 	} catch (err) {
 		logger.error(err);
 		throw err;

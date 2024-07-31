@@ -4,7 +4,7 @@ import path from 'path';
 
 (async () => {
 	try {
-		if (path.basename(require.main.path) !== 'src') {
+		if (path.basename(require.main.path) !== 'data:text') {
 			moduleAlias.addAliases({
 				'@root': path.join(process.cwd(), 'dist'),
 				'@http': path.join(process.cwd(), 'dist/app/http/'),
