@@ -1,7 +1,7 @@
 <div align="center">
 	<img src="./storage/static/private/images/logo-knitto.png" width="150"/>
-	<h1>Knitto Rest Third Party</h1>
-	*Aplikasi Backend yang berfungsi untuk berkomunikasi dengan service pihak ketiga*
+	<h1>Knitto Backend Apps</h1>
+	*Ini adalah boiler plate untuk aplikasi Backend yang ada di knitto*
 </div>
 
 # Struktur Project
