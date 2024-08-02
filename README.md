@@ -1,8 +1,11 @@
 <div align="center">
 	<img src="./storage/static/private/images/logo-knitto.png" width="150"/>
 	<h1>Knitto Rest Third Party</h1>
-	_Aplikasi Backend yang berfungsi untuk berkomunikasi dengan service pihak ketiga_
+	*Aplikasi Backend yang berfungsi untuk berkomunikasi dengan service pihak ketiga*
 </div>
+
+# Struktur Project
+struktur project bisa dilihat di [sini](https://github.com/knittotextile/rest-boilerplate-ts/blob/dev/Struktur%20Project.md)
 
 ## Instalasi aplikasi (development)
 1. Login ke npm github knitto
