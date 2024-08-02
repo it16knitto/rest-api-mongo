@@ -1,51 +1,31 @@
-# Rest Boilerplate Backend Typescript Knitto 
+<div align="center">
+	<img src="./storage/static/private/images/logo-knitto.png" width="150"/>
+	<h1>Knitto Rest Third Party</h1>
+	_Aplikasi Backend yang berfungsi untuk berkomunikasi dengan service pihak ketiga_
+</div>
 
-Repository ini digunakan untuk base dasar untuk pembuatan aplikasi backend, dan akan selalu di update sesuai kebutuhan yang ada di knitto.
+## Instalasi aplikasi (development)
+1. Login ke npm github knitto
+2. Jalankan ``pnpm install``
+3. Jalankan ``pnpm dev``
 
-kunjungi branch **[example/simple-case](https://github.com/knittotextile/rest-boilerplate-ts/tree/example/simple-case)** untuk mencoba koneksi database Mysql dan queue message Rabbitmq, kemudian download **[Postman Collection](https://drive.google.com/file/d/1QAPqquKXpqfqqg0QWBJrmaP3a3C3Qm19/view?usp=drive_link)** berikut untuk melakukan percobaan.
+## Flow Git BugsDev
+![Flow git bugsdev](./storage/static/private/images/flow_bugsdev.webp)
 
-## Struktur Project 
+## Flow Git Development Fitur
+![Flow git fitur](./storage/static/private/images/flow_git_fitur.webp)
 
-**`Keterangan`**
-- Pengguna nama file atau folder ketika ada spasi menggunakan `camelCase`.
-- Masukan kedalam folder bila terdapat pengujian atau file lain yang berinterkasi seperti pada contoh folder controller dan middleware di bawah.
-----------
+## Flow Fitur Flags (Branch by Abstractions)
+Fitur flag disini berfungsi sebagai penjaga fitur-fitur baru tidak di eksekusi di server production.
 
-```
-/ root directory
-├─ database														# digunakan untuk migration database
-├─ src																# source prorgam
-│  ├─ app															# folder jenis aplikasi yang dibuat
-│  │  ├─ background										# aplikasi yang bersifat background (timer, scheduler, emitter, etc)
-│  │  ├─ http													# aplikasi http (rest-api)
-│  │  │  ├─ [nama-path-http]
-│  │  │  │  └─ namaController
-│  │  │  │  ├─ [namaController].controller.ts
-│  │  │  │  ├─ [namaController].request.ts
-│  │  │  │  ├─ [namaController].routes.ts
-│  │  │  │  └─ [namaController].spec.ts
-│  │  │  ├─ index.ts									# file konfigurasi server http
-│  │  │  └─ middlewares
-│  │  │     └─ namaMiddleware.ts
-│  │  ├─ messageBroker								# aplikasi penghubung ke message broker
-│  │  │  ├─ index.ts									# konfigurasi aplikasi message broker
-│  │  │  ├─ publishers								# publisher
-│  │  │  └─ subscribers								# subscribers
-│  │  └─ ws														# aplikasi web socket
-│  ├─ index.ts												# starting point aplikasi
-│  ├─ libs														# source code pendukung aplikasi
-│  │  ├─ config												# configurasi dan constans
-│  │  ├─ helpers											# function-function general seperti stringFormatter, dateFormatter etc
-│  │  └─ types												# general types (semua file disini gunakan format .d.ts)
-│  ├─ repositories										# kumpulan query ataupun logic interaksi ke db yang ada kemungkinan di sharing, process update, insert dan delete wajib di simpan di folder ini
-│  └─ services												# kumpulan kode logic aplikasi yang berhubungan dengan flow bisnis dan ada kemungkinan di sharing
-├─ storage														# tempat penyimpanan file-file yang dibutuhkan aplikasi
-│  └─ static													# file yang tidak akan berubah secara dinamis
-│     ├─ private											# file yang hanya bisa diakses oleh aplikasi
-│     └─ public												# file yang bisa diakses tanpa melalui aplikasi
-└─ tests															# test file
+![Flow fitur flag](./storage/static/private/images/flow_fitur_flag.webp)
 
-```
+## Aturan deploy ke production
+1. Dinyatakan lolos testing oleh team tester
+2. Hapus fitur flag dan old code pada fitur-fitur yang akan di rilis
+3. Buat branch baru dari origin/dev beri nama releases/vX.X.X.X
 
-## Core Knitto Package
-repository ini menggunakan library khusus [**`Knitto Core Backend`**](https://github.com/knittotextile/knitto-core-backend) secara private, gunakan panduan berikut untuk cara install library core [**`Working with the npm registry`**](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry).
+### Notes
+1. Aturan commit menggunakan conventional commit
+2. Node v.20.11.1
+3. Package manager pnpm
