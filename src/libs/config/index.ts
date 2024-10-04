@@ -23,3 +23,7 @@ export const rabbitMQConfig = {
 	URL: process.env.RABBITMQ_URL || 'amqp://localhost:5672',
 	EXCHANGE: process.env.RABBITMQ_EXCHANGE || 'noExchange'
 };
+
+export const mongoConfig = {
+	URI: process.env.MONGO_URI || 'mongodb://localhost:27017/db'
+};

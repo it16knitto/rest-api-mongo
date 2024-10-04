@@ -1,6 +1,12 @@
 import { logger } from '@knittotextile/knitto-core-backend';
 import { ExpressServer } from '@knittotextile/knitto-http';
-import { APP_EXPOSE_DOCS, APP_NAME, APP_PORT_HTTP, APP_VERSION } from '@root/libs/config';
+import {
+	APP_EXPOSE_DOCS,
+	APP_NAME,
+	APP_PORT_HTTP,
+	APP_VERSION
+} from '@root/libs/config';
+import { apiReference } from '@scalar/express-api-reference';
 import expressJSDocSwagger from 'express-jsdoc-swagger';
 import path from 'path';
 
@@ -9,14 +15,21 @@ async function httpServer() {
 		const server = new ExpressServer({
 			routerPath: {
 				basePath: __dirname,
-				exceptDir: [
-					path.join(__dirname, 'middlewares'),
-				]
+				exceptDir: [path.join(__dirname, 'middlewares')]
 			},
 			port: APP_PORT_HTTP
 		});
 
 		expressJSDocSwagger(server.app)(swaggerOptions);
+
+		server.app.use(
+			'/reference',
+			apiReference({
+				spec: {
+					url: '/json-api-docs'
+				}
+			})
+		);
 
 		await server.start();
 	} catch (error) {
@@ -52,7 +65,7 @@ const swaggerOptions = {
 	// you can extend swagger-ui-express config. You can checkout an example of this
 	// in the `example/configuration/swaggerOptions.js`
 	swaggerUiOptions: {},
-	multiple: false,
+	multiple: false
 };
 
 export default httpServer;
