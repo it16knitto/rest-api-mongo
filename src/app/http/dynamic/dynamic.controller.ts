@@ -174,7 +174,7 @@ export const findDynamicField: TRequestFunction = async (req) => {
 	};
 };
 
-const mapping = (result: any[]) => {
+export const mapping = (result: any[]) => {
 	const arrResult = [];
 	for (const item of result) {
 		const id = item._id;
@@ -188,35 +188,45 @@ const mapping = (result: any[]) => {
 				key !== '_doc' &&
 				key !== '$__'
 		);
-		const data = field_name.map((key) => {
+
+		const data = [];
+
+		for (const key of field_name) {
 			const value = item[key];
 			const type = typeMapping(value);
+
 			if (type === 'array of object' && value !== null) {
-				return {
+				data.push({
 					name_field: key,
 					caption: convertToNormal(key),
 					type,
 					is_recursive: true,
 					data: value.map((subItem: any) => mapping([subItem])[0])
-				};
-			}
-			if (type === 'object' && value !== null) {
-				return {
+				});
+			} else if (type === 'object' && value !== null) {
+				const mappedValue = mapping([value])[0];
+
+				if (mappedValue.data.length === 0) {
+					continue;
+				}
+
+				data.push({
 					name_field: key,
 					type,
 					is_recursive: true,
 					caption: convertToNormal(key),
-					...mapping([value])[0]
-				};
+					...mappedValue
+				});
+			} else {
+				data.push({
+					name_field: key,
+					type,
+					is_recursive: false,
+					caption: convertToNormal(key),
+					value
+				});
 			}
-			return {
-				name_field: key,
-				type,
-				is_recursive: false,
-				caption: convertToNormal(key),
-				value
-			};
-		});
+		}
 
 		arrResult.push({ id, createdAt, updatedAt, data });
 	}
@@ -255,6 +265,7 @@ const convertToNormal = (varibale: string) => {
 
 export const getDynamicData: TRequestFunction = async (req) => {
 	const { search, page, perPage } = req.body as TGetDynamicDataValidation;
+
 	const subFilter = search.map(({ field, value, operator }) => {
 		switch (operator.toLowerCase()) {
 			case 'equal':
