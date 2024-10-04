@@ -125,6 +125,9 @@ export const postDataDynamic: TRequestFunction = async (req) => {
 	};
 
 	const transformedBody = transformObject(body);
+	const timestamp = new Date();
+	body.created_at = timestamp;
+	body.updated_at = timestamp;
 	await mongoDB.collection('dynamics').insertOne(body);
 	const bulkOps = transformedBody.map((field) => ({
 		updateOne: {

@@ -7,7 +7,6 @@ import dynamicNativeRequest from './dynamic-native.request';
 import {
 	getAllField,
 	getDynamicnativeData,
-	getFieldNames,
 	postDataDynamic
 } from './dynamic-native.controller';
 
@@ -55,7 +54,7 @@ dynamicNativeRouter.post(
 );
 
 /**
- * GET /dynamic-native/list/field-names
+ * GET /dynamic-native/list/fields
  * @tags Dynamic Native
  * @summary get field names
  * @return {object} 200 - success
@@ -68,8 +67,8 @@ dynamicNativeRouter.post(
  * }
  */
 dynamicNativeRouter.get(
-	'/dynamic-native/list/field-names',
-	requestHandler(getFieldNames)
+	'/dynamic-native/list/fields',
+	requestHandler(getAllField)
 );
 
 /**
@@ -85,18 +84,5 @@ dynamicNativeRouter.get(
  * }
  */
 dynamicNativeRouter.post('/dynamic-native/', requestHandler(postDataDynamic));
-
-/**
- * GET /dynamic-native/fields
- * @tags Dynamic Native
- * @summary get field names
- * @return {object} 200 - success
- * @example response - 200 - success
- * {
- * 	"message": "Success",
- * 	"result": []
- * }
- */
-dynamicNativeRouter.get('/dynamic-native/fields', requestHandler(getAllField));
 
 export default dynamicNativeRouter;
